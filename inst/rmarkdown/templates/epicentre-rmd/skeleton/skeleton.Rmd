@@ -12,8 +12,7 @@ output:
     latex_engine: xelatex
     toc: yes
     include:
-      in_header: pdf/header.tex
-    keep_tex: true
+      in_header: 'pdf/header.tex'
   html_document:
     theme: cosmo
     toc: true
@@ -21,9 +20,10 @@ output:
     toc_collapsed: true
     css: 'css/epicentre_rmd_style.css'
   word_document:
-    reference_docx: word/reference.docx
-documentclass: "scrartcl"
-classoption: "a4paper"
+    reference_docx: 'word/reference.docx'
+    toc: true
+documentclass: 'scrartcl'
+classoption: 'a4paper'
 geometry: margin=1in
 ---
 
