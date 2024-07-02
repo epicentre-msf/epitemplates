@@ -7,14 +7,26 @@ subtitle: "`r ifelse(!is.null(params$author), params$author, '')`"
 author: "*`r ifelse(!is.null(params$team), paste(params$team, ' - Epicentre, Paris'), 'Epicentre, Paris')`*"
 date: "last updated `r format(Sys.Date(), '%d %b %Y')`"
 output:
+  pdf_document:
+    highlight: haddock
+    latex_engine: xelatex
+    toc: yes
+    include:
+      in_header: pdf/header.tex
+    keep_tex: true
   html_document:
     theme: cosmo
     toc: true
     toc_float: true
     toc_collapsed: true
     css: 'css/epicentre_rmd_style.css'
-    keep_tex: false
+  word_document:
+    reference_docx: word/reference.docx
+documentclass: "scrartcl"
+classoption: "a4paper"
+geometry: margin=1in
 ---
+
 <script>
   $(document).ready(function() {
     $('#TOC').parent().prepend('<div id="nav_logo"><img src="img/epicentre_logo.png"></div>');
@@ -46,11 +58,11 @@ library(tidyverse)  # data science
 
 ## Secondary title
 
-::: {.hint}
+::: {.hint data-latex=""}
 **This is a special note** using the `{.hint}` class, it allows you to emphasize an important point of the section 
 :::
 
-::: {.important}
+::: {.important data-latex=""}
 **Important note** using the `{.important}` class - This is useful to emphasize an important point of the section
 :::
 
