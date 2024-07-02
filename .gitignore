@@ -3,3 +3,4 @@
 \\.vscode/
 *.Rhistory
 *.Renviron
+.Rproj.user
