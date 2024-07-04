@@ -21,9 +21,10 @@ epids_qmd <- function(
     quiet = FALSE,
     project_type = "document",
     add_project = (project_type == "book")) {
-  if (length(list.files(dir)) > 0) stop("Please provide an empty directory")
   if ((length(project_type) > 1) | !(project_type %in% c("document", "book"))) stop("Invalid value for project_type")
   previous_wd <- getwd()
+  if (!dir.exists(dir)) dir.create(dir)
+  if (length(list.files(dir)) > 0) stop("Please provide an empty directory")
   setwd(dir)
 
   template_dir <- ifelse(project_type == "document", "epicentre-msf/epitemplates-report", "epicentre-msf/epitemplates-book")
