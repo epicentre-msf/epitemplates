@@ -1,0 +1,9 @@
+Name: EpiDS quarto document
+Description: Download the quarto EpiDS document template in the current repository
+Binding: epids_interactive_doc
+Interactive: true
+
+Name: EpiDS quarto book
+Description: Download the quarto EpiDS book template in the current repository
+Binding: epids_interactive_book
+Interactive: true
