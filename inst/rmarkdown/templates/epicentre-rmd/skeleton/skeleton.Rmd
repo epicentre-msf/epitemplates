@@ -12,15 +12,15 @@ output:
     latex_engine: xelatex
     toc: yes
     include:
-      in_header: 'pdf/header.tex'
+      in_header: 'assets/pdf/header.tex'
   html_document:
     theme: cosmo
     toc: true
     toc_float: true
     toc_collapsed: true
-    css: 'css/epicentre_rmd_style.css'
+    css: 'assets/css/epicentre_rmd_style.css'
   word_document:
-    reference_docx: 'word/reference.docx'
+    reference_docx: 'assets/word/reference.docx'
     toc: true
 documentclass: 'scrartcl'
 classoption: 'a4paper'
