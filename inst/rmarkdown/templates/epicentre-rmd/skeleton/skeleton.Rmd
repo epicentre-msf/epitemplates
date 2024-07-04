@@ -29,7 +29,7 @@ geometry: margin=1in
 
 <script>
   $(document).ready(function() {
-    $('#TOC').parent().prepend('<div id="nav_logo"><img src="img/epicentre_logo.png"></div>');
+    $('#TOC').parent().prepend('<div id="nav_logo"><img src="assets/img/epicentre_logo.png"></div>');
   });
 </script>
 
