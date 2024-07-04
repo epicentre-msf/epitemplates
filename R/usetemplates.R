@@ -42,7 +42,7 @@ epids_qmd <- function(
 #' @noRd
 #' @importFrom rstudioapi selectDirectory
 epids_interactive_doc <- function() {
-  epids_qmd(rstudioapi::selectDirectory(), add_project = TRUE)
+  epids_qmd(rstudioapi::selectDirectory())
 }
 #' @noRd
 #' @importFrom rstudioapi selectDirectory

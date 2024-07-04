@@ -16,7 +16,12 @@ Using RStudio IDE, `File > New File > R Markdown`.
 
 Click on the *From Templates* and select _Epicentre Rmd template_ from the pane
 
-The templates could also be loaded by typing `rmarkdown::draft("epicentre-rmd")`
+The templates could also be loaded by typing
+
+```r
+rmarkdown::draft(file = "template.Rmd", templates = "epicentre-rmd", package="epitemplates")
+```
+
 in the R console.
 
 - **Quarto**
