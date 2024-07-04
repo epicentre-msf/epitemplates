@@ -28,7 +28,7 @@ epitemplates::epids_qmd(dir, project_type = "book")
 ```
 where `dir` is the directory of the book. 
 The book is based on quarto project
-type [epicentre-msf/epitemplates-book](https://github.com/epicentre-msf/epitemplates-report).
+type [epicentre-msf/epitemplates-book](https://github.com/epicentre-msf/epitemplates-book).
 
 For single documents, 
 
