@@ -1,9 +1,14 @@
-Name: EpiDS quarto document
-Description: Download the quarto EpiDS document template in the current repository
-Binding: epids_interactive_doc
+Name: Quarto document
+Description: Quarto document template
+Binding: addin_quarto_doc
 Interactive: true
 
-Name: EpiDS quarto book
-Description: Download the quarto EpiDS book template in the current repository
-Binding: epids_interactive_book
+Name: Rmarkdown document
+Description: Rmarkdown document template
+Binding: addin_rmd_doc
+Interactive: true
+
+Name: Quarto book
+Description: Quarto book template
+Binding: addin_quarto_book
 Interactive: true

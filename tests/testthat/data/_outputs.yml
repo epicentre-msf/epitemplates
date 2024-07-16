@@ -1,0 +1,8 @@
+extensions:
+  pdf: "local/pdf"
+  html: "local/html"
+files:
+- regex: "^test"
+  folder: "local/test"
+- regex: "report"
+  folder: "local/reports"
