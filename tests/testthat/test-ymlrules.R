@@ -106,7 +106,7 @@ test_that(
 
 
 test_that(
-  "Able to apply rules from yaml on a mixe of file and folders",
+  "Able to apply rules from yaml on a mix of file and folders",
   {
     output_dir = tmp_loc("output-dir")
     tmp_rmd = tmp_loc("test-temp-rmd")
@@ -154,3 +154,55 @@ test_that(
     quietly_delete(output_dir)
   }
 )
+
+
+test_that(
+  "Able to apply rules from yaml on a mix of file and folders and remove rendering folders",
+  {
+    output_dir = tmp_loc("output-dir")
+    tmp_rmd = tmp_loc("test-temp-rmd")
+    tmp_qmd = tmp_loc("test-temp-qmd")
+    tmp = tmp_loc("test-temp")
+
+    suppressMessages({
+      expect_true(epi_rmd(fs::path(tmp_rmd, "test-rmd.Rmd")))
+      expect_true(epi_qmd(fs::path(tmp_qmd, "test-qmd.qmd")))
+      expect_true(epi_rmd(fs::path(tmp_rmd, "report-rmd.Rmd")))
+      expect_true(epi_qmd(fs::path(tmp_qmd, "report-qmd.qmd")))
+    })
+
+    fs::dir_create(tmp_rmd)
+    fs::file_copy(test_path("data", "_outputs.yml"), tmp_rmd)
+
+    fs::dir_create(tmp_qmd)
+    fs::file_copy(test_path("data", "_outputs.yml"), tmp_qmd)
+
+    fs::dir_create(tmp)
+
+    mixed_els = c(tmp_rmd, fs::path(tmp_qmd, "test-qmd.qmd"), fs::path(tmp_qmd, "report-qmd.qmd"))
+
+    withr::with_dir(
+      tmp,
+      epi_render(mixed_els, output_dir = output_dir, quiet = TRUE)
+    )
+
+    out_local_pdf = fs::path(tmp, "local", "pdf", "report-rmd.pdf")
+    out_local_report = fs::path(tmp, "local", "reports", "report-qmd.html")
+    out_local_html = fs::path(tmp, "local", "html", "report-rmd.html")
+
+    print(fs::dir_ls(tmp, recurse = TRUE))
+
+    # test if some of the files have been added
+    expect_true(fs::file_exists(out_local_pdf))
+    expect_true(fs::file_exists(out_local_report))
+    expect_true(fs::file_exists(out_local_html))
+    expect_false(fs::file_exists(fs::path(tmp_qmd, "test-qmd.html")))
+    expect_false(fs::file_exists(fs::path(tmp_rmd, "test-rmd.pdf")))
+
+    quietly_delete(tmp)
+    quietly_delete(tmp_rmd)
+    quietly_delete(tmp_qmd)
+    quietly_delete(output_dir)
+  }
+)
+

@@ -11,7 +11,7 @@
 #'@importFrom xfun try_silent
 #'@importFrom fs file_delete
 
-apply_yml_rules = function(path, output_dir = NULL){
+apply_yml_rules = function(path, output_dir = NULL, remove_renders = FALSE){
 
   # path could be either a repository or a file path
   source_dir = path
@@ -79,6 +79,8 @@ apply_yml_rules = function(path, output_dir = NULL){
 
     # apply all the regular expressions to the
     purrr::walk(regex_list, apply_expressions, files = fs::path_file(target_files), source_dir = target_folder)
+
+    if (remove_renders) xfun::try_silent(fs::file_delete(target_files))
   }
 }
 

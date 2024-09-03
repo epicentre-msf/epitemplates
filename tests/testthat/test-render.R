@@ -196,3 +196,46 @@ test_that(
     quietly_delete(output_dir)
   }
 )
+
+# adding test on removing rendering files
+
+test_that(
+  "Can remove rendering files when rendering a mix of files and directories",
+  {
+    skip_on_cran()
+
+    tmp_rmd = tmp_loc("test-temp-rmd")
+    tmp_qmd = tmp_loc("test-temp-qmd")
+    output_dir = tmp_loc("output-dir")
+
+    suppressMessages({
+      expect_true(epi_rmd(fs::path(tmp_rmd, "test-rmd.Rmd")))
+      expect_true(epi_qmd(fs::path(tmp_qmd, "test-qmd.qmd")))
+      expect_true(epi_rmd(fs::path(tmp_rmd, "report-rmd.Rmd")))
+      expect_true(epi_qmd(fs::path(tmp_qmd, "report-qmd.qmd")))
+    })
+
+    mixed_els = c(tmp_rmd, fs::path(tmp_qmd, "test-qmd.qmd"), fs::path(tmp_qmd, "report-qmd.qmd"))
+    epi_render(mixed_els, output_dir = output_dir, quiet = TRUE, remove_renders = TRUE)
+
+    # test that everything works fine and the files are removed
+    expect_true(fs::file_exists(fs::path(output_dir, "test-rmd.html")))
+    expect_true(fs::file_exists(fs::path(output_dir, "test-rmd.pdf")))
+    expect_true(fs::file_exists(fs::path(output_dir, "test-rmd.docx")))
+
+    expect_true(fs::file_exists(fs::path(output_dir, "report-rmd.html")))
+    expect_true(fs::file_exists(fs::path(output_dir, "report-rmd.pdf")))
+    expect_true(fs::file_exists(fs::path(output_dir, "report-rmd.docx")))
+
+    expect_true(fs::file_exists(fs::path(output_dir, "test-qmd.html")))
+    expect_true(fs::file_exists(fs::path(output_dir, "report-qmd.html")))
+
+    expect_false(fs::file_exists(fs::path(tmp_qmd, "test-rmd.html")))
+    expect_false(fs::file_exists(fs::path(tmp_qmd, "test-rmd.pdf")))
+    expect_false(fs::file_exists(fs::path(tmp_qmd, "test-rmd.docx")))
+
+    quietly_delete(tmp_rmd)
+    quietly_delete(tmp_qmd)
+    quietly_delete(output_dir)
+  }
+)
